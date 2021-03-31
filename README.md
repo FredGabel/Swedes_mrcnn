@@ -8,12 +8,12 @@ both ends of the Swede (root and stem).
 # Usage:
 
 Train a new model starting from pre-trained COCO weights:
-_python3 samples/samples/swede/swede.py train --dataset=/path/to/coco/ --model=coco_
+  python3 samples/samples/swede/swede.py train --dataset=/path/to/coco/ --model=coco
 
 Labelling was done using VGG image annotator
 
 Run trained model inference on an image folder:
-_python samples\swede\swede.py detect --weights=mask_rcnn_swede.h5 --image=images\_
+  python samples\swede\swede.py detect --weights=mask_rcnn_swede.h5 --image=images\
 
 # Results :
 ![image](https://user-images.githubusercontent.com/33094919/113133693-db88a280-9217-11eb-8408-04234980a27a.png)
