@@ -20,9 +20,10 @@ Usage: import the module (see Jupyter notebooks for examples), or run from
 Implementation for Scorpion : Fred Gabel (FG)
 
 Revision history:
-
-
-
+23Feb2021, FG: 1.0.0.1
+       * Initial github commit
+31Feb2021, FG: 1.0.0.2
+       * Cleaning repo
 """
 
 import os
@@ -58,14 +59,13 @@ DEFAULT_LOGS_DIR = os.path.join(ROOT_DIR, "logs")
 
 
 class SwedeConfig(Config):
-    """Configuration for training on the toy  dataset.
-    Derives from the base Config class and overrides some values.
+    """
+    Configuration for training on the swede dataset.
     """
     # Give the configuration a recognizable name
     NAME = "swede"
 
-    # We use a GPU with 12GB memory, which can fit two images.
-    # Adjust down if you use a smaller GPU.
+    # Adjust depensing the RAM of the GPU.
     IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
@@ -96,21 +96,6 @@ class SwedeDataset(utils.Dataset):
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
 
-        # Load annotations
-        # VGG Image Annotator (up to version 1.6) saves each image in the form:
-        # { 'filename': '28503151_5b5b7ec140_b.jpg',
-        #   'regions': {
-        #       '0': {
-        #           'region_attributes': {},
-        #           'shape_attributes': {
-        #               'all_points_x': [...],
-        #               'all_points_y': [...],
-        #               'name': 'polygon'}},
-        #       ... more regions ...
-        #   },
-        #   'size': 100202
-        # }
-        # We mostly care about the x and y coordinates of each region
         # Note: In VIA 2.0, regions was changed from a dict to a list.
         annotations = json.load(open(os.path.join(dataset_dir, "via_region_data.json")))
         annotations = list(annotations.values())  # don't need the dict keys
@@ -262,7 +247,6 @@ if __name__ == '__main__':
                         metavar="path or URL to image",
                         help='Image to the detection prediction')
 
-
     args = parser.parse_args()
 
     # Validate arguments
@@ -278,7 +262,7 @@ if __name__ == '__main__':
 
     # Configurations
     if args.command == "train":
-        config = SproutConfig()
+        config = SwedeConfig()
     else:
         class InferenceConfig(SwedeConfig):
             # Set batch size to 1 since we'll be running inference on
