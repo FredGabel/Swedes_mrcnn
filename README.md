@@ -1,4 +1,4 @@
-# Swedes_mcnn
+# Swedes_mrcnn
 
 # Train a new model starting from pre-trained COCO weights
 python3 samples/samples/swede/swede.py train --dataset=/path/to/coco/ --model=coco
